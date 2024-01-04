@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Container, Flex, Skeleton, SkeletonCircle, Text, VStack } from "@chakra-ui/react";
-import BarcodeScanner from "react-barcode-scanner";
-import Button from "../../components/Button";
-import NFCReader from "react-nfc";
+import React from 'react';
+
+// Import the react-barcode-scanner package dynamically
+const reactBarcodeScanner = await import('react-barcode-scanner');
 
 const HomePage = () => {
   const [scanResult, setScanResult] = useState('');
 
-  const handleScan = (event) => {
-    const scanData = event.detail.data;
+  const handleScan = async event => {
+    const scanData = await reactBarcodeScanner.scan();
     setScanResult(scanData);
   };
 
