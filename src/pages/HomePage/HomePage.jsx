@@ -3,24 +3,6 @@ import FeedPosts from "../../components/FeedPosts/FeedPosts";
 import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
 
 const HomePage = () => {
-  useEffect(() => {
-    // Vérification de la prise en charge de l'API NFC
-    if ('NDEFReader' in window) {
-      const reader = new NDEFReader();
-      reader.scan().then(() => {
-        reader.addEventListener('reading', event => {
-          const message = event.message;
-          // Faites quelque chose avec les données du tag NFC
-          console.log(message);
-        });
-      }).catch(error => {
-        console.error('Error reading NFC', error);
-      });
-    } else {
-      console.error('Web NFC not supported');
-    }
-  }, []);
-
 	return (
 		<Container maxW={"container.lg"}>
 			<Flex gap={20}>
