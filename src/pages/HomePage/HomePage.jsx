@@ -1,28 +1,48 @@
-import { Box, Container, Flex, Button } from "@chakra-ui/react";
-import FeedPosts from "../../components/FeedPosts/FeedPosts";
-import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
-import ScanPage from "./ScanPage/ScanPage.jsx";
+import React, { useState, useEffect } from "react";
+import { Container, Flex, Skeleton, SkeletonCircle, Text, VStack } from "@chakra-ui/react";
+import BarcodeScanner from "react-barcode-scanner";
+import Button from "../../components/Button";
+import NFCReader from "react-nfc";
 
 const HomePage = () => {
+  const [scanResult, setScanResult] = useState('');
+
+  const handleScan = (event) => {
+    const scanData = event.detail.data;
+    setScanResult(scanData);
+  };
+
+  useEffect(() => {
+    const scanner = new NFCReader();
+    scanner.on('scan', handleScan);
+    scanner.start();
+
+    // Stop the scanner when the component is unmounted
+    return () => {
+      scanner.stop();
+    };
+  }, []);
+
   return (
-    <Container maxW={"container.lg"}>
-      <Flex gap={20}>
-        <Box flex={2} py={10}>
-          <FeedPosts />
-        </Box>
-        <Box flex={3} mr={20} display={{ base: "none", lg: "block" }} maxW={"300px"}>
-          <SuggestedUsers />
-        </Box>
-        <Button
-          variant="primary"
-          as="button"
-          onClick={() => {
-            // Navigate to the ScanPage
-            alert("Navigating to ScanPage");
-          }}
-        >
-          Scan
-        </Button>
+    <Container maxW='container.lg' py={5}>
+      <Flex>
+        {!scanResult && (
+          <SkeletonCircle size='24' />
+        )}
+
+        {scanResult && (
+          <Flex flexDirection='column'>
+            <Text fontSize={'2xl'}>{scanResult.id}</Text>
+            <Text fontSize={'2xl'}>{scanResult.type}</Text>
+            <Text fontSize={'2xl'}>{scanResult.payload}</Text>
+          </Flex>
+        )}
+
+        <Button variant='primary' onClick={() => {
+          const scanner = new NFCReader();
+          scanner.on('scan', handleScan);
+          scanner.start();
+        }}>Scan</Button>
       </Flex>
     </Container>
   );
