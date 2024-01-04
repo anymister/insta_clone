@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Button } from "@chakra-ui/react";
 import FeedPosts from "../../components/FeedPosts/FeedPosts";
 import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
-import ScanPage from "./ScanPage";
+import ScanPage from "./ScanPage/ScanPage.jsx";
 
 const HomePage = () => {
   return (
