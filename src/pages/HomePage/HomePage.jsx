@@ -1,50 +1,38 @@
-import React from 'react';
-
-// Import the react-barcode-scanner package dynamically
-const reactBarcodeScanner = await import('react-barcode-scanner');
+import { Box, Container, Flex } from "@chakra-ui/react";
+import FeedPosts from "../../components/FeedPosts/FeedPosts";
+import SuggestedUsers from "../../components/SuggestedUsers/SuggestedUsers";
 
 const HomePage = () => {
-  const [scanResult, setScanResult] = useState('');
-
-  const handleScan = async event => {
-    const scanData = await reactBarcodeScanner.scan();
-    setScanResult(scanData);
-  };
-
   useEffect(() => {
-    const scanner = new NFCReader();
-    scanner.on('scan', handleScan);
-    scanner.start();
-
-    // Stop the scanner when the component is unmounted
-    return () => {
-      scanner.stop();
-    };
+    // Vérification de la prise en charge de l'API NFC
+    if ('NDEFReader' in window) {
+      const reader = new NDEFReader();
+      reader.scan().then(() => {
+        reader.addEventListener('reading', event => {
+          const message = event.message;
+          // Faites quelque chose avec les données du tag NFC
+          console.log(message);
+        });
+      }).catch(error => {
+        console.error('Error reading NFC', error);
+      });
+    } else {
+      console.error('Web NFC not supported');
+    }
   }, []);
 
-  return (
-    <Container maxW='container.lg' py={5}>
-      <Flex>
-        {!scanResult && (
-          <SkeletonCircle size='24' />
-        )}
-
-        {scanResult && (
-          <Flex flexDirection='column'>
-            <Text fontSize={'2xl'}>{scanResult.id}</Text>
-            <Text fontSize={'2xl'}>{scanResult.type}</Text>
-            <Text fontSize={'2xl'}>{scanResult.payload}</Text>
-          </Flex>
-        )}
-
-        <Button variant='primary' onClick={() => {
-          const scanner = new NFCReader();
-          scanner.on('scan', handleScan);
-          scanner.start();
-        }}>Scan</Button>
-      </Flex>
-    </Container>
-  );
+	return (
+		<Container maxW={"container.lg"}>
+			<Flex gap={20}>
+				<Box flex={2} py={10}>
+					<FeedPosts />
+				</Box>
+				<Box flex={3} mr={20} display={{ base: "none", lg: "block" }} maxW={"300px"}>
+					<SuggestedUsers />
+				</Box>
+			</Flex>
+		</Container>
+	);
 };
 
 export default HomePage;
