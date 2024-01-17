@@ -8,7 +8,7 @@ export const InstagramLogo = () => (
 		role='img'
 		viewBox='32 4 400 400'
 		width='100'
-	>
+	/>
 
 );
 
