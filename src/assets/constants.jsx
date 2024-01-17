@@ -204,7 +204,7 @@ export const InstagramMobileLogo = () => (
 <path transform="matrix(1 0 0 1 0 -7.1054e-15)" d="m81.998 351.65c0.218-0.029 0.428 0.219 0.755 0.7-0.176 0.015-0.47-0.203-0.755-0.7z" fill="#f3eaea"/>
 </svg>
 
-</svg>
+
 );
 
 export const SearchLogo = () => (
