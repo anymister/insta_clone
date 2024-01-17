@@ -14,13 +14,10 @@ const Sidebar = () => {
 			borderRight={"1px solid"}
 			borderColor={"whiteAlpha.300"}
 			py={8}
-			position={{ base: "fixed", md: "sticky" }}
+			position={"sticky"}
 			top={0}
 			left={0}
-			right={0} // Ajout de la propriété right pour éviter un débordement à droite
 			px={{ base: 2, md: 4 }}
-			bg={"white"} // Ajout d'une couleur de fond pour mieux visualiser le placement en haut
-			zIndex={10} // Ajout de la propriété zIndex pour garantir que le menu soit au-dessus du contenu
 		>
 			<Flex direction={"column"} gap={10} w='full' height={"full"}>
 				<Link to={"/"} as={RouterLink} pl={2} display={{ base: "none", md: "block" }} cursor='pointer'>
