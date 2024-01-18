@@ -6,8 +6,8 @@ export const InstagramLogo = () => (
 	role='img'
 	viewBox='0 0 320 320'
 	width='120'
-	color='rgb(245, 245, 245)'
 	
+	fill='rgb(245, 245, 245)'
 	>
 <path fill='none'
 			stroke='currentColor'
