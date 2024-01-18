@@ -1,12 +1,11 @@
 export const InstagramLogo = () => (
 		
 <svg
-		aria-label='Instagram'
-	
-		height='50'
-		role='img'
-		viewBox='0 0 450 450'
-		width='50'
+	aria-label='CHIC'
+	height='120'
+	role='img'
+	viewBox='0 0 320 320'
+	width='120'
 	>
 <path fill='none'
 			stroke='currentColor'
